@@ -8,4 +8,5 @@ from core import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
+    path("items/", include("item.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
