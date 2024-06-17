@@ -31,10 +31,12 @@
                         Delete
                     </a>
                 </div>
+            {% else %}
+                <a href="{% url "chat:new" item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                    Contact Seller
+                </a>
             {% endif %}
-            <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
-                Contact Seller
-            </a>
+
         </div>
     </div>
 
