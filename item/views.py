@@ -1,13 +1,33 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import EditItemForm, NewItemForm
-from .models import Item
+from .models import Category, Item
+
+
+def browse(request):
+    query = request.GET.get("query", "")
+    current_cat_id = int(request.GET.get("category", 0))
+    items = Item.objects.filter(is_sold=False)
+    categories = Category.objects.all()
+
+    if current_cat_id:
+        items = items.filter(category_id=current_cat_id)
+
+    if query:
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    return render(
+        request,
+        "item/browse.html",
+        {"items": items, "query": query, "categories": categories, "current_cat_id": current_cat_id},
+    )
 
 
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
-    related_items = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)[:3]
+    related_items = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)[:5]
     return render(request, "item/detail.html", {"item": item, "related_items": related_items})
 
 

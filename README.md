@@ -8,7 +8,7 @@ Puddle is a Full-Stack e-commerce application built with Django. It includes use
 
 ## Tech Stack
 * Backend: Django, Django REST framework
-* Frontend: HTML, CSS
+* Frontend: HTML, Tailwind CSS
 * Database: SQLite (Development), PostgreSQL/MySQL (Production)
 
 ## Todo
